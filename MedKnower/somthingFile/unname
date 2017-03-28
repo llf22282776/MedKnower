@@ -1,0 +1,111 @@
+
+------------------------------------------------------------------------detialpanel-----------------------------------------------------------------------
+return (<Container>
+         <Header> {/*返回上一个界面，上个界面压入到导航器中*/}
+          <Left>
+            <Button transparent iconLeft onPress={this.returnLastOne}>
+               <Icon name='arrow-back' />
+               <Text>药品详情</Text>
+            </Button>
+          </Left>
+          <Body>
+          </Body>
+         </Header>
+         <Content>  {/*主要内容区域*/}
+            <Card>
+              <CardItem cardBody> {/*放图片*/}
+                <Image source={require(this.props.MedMsg.imgUrl)} />  {/*uri:this.props.imgContentUri*/}
+              </CardItem>
+              <CardItem> {/*信息*/}
+                <Left> {/*浏览次数*/}
+                  {this.props.MedMsg.viewTimes}
+                </Left>
+                <Right>
+                  <Button transparent iconRight>
+                    <Icon active name="chatbubbles" />
+                    <Text>{this.props.MedMsg.comments} 评论</Text>
+                  </Button>
+                </Right> {/*评论数*/}
+              </CardItem>
+            </Card>
+            <ListItem itemDivider>
+               <Text> </Text>
+            </ListItem>
+            <ListItem icon onPress={()=>{}}> {/*跳转函数*/}
+                        <Left>
+                            <Icon active name="wifi" /> {/*编辑图标*/}
+                        </Left>
+                        <Body>
+                          <Text>你的评价</Text>
+                        </Body>    
+            </ListItem>
+           
+            <ListItem itemDivider>
+               <Text> </Text>
+            </ListItem>
+            <ListItem icon onPress={ ()=>{
+              this.state.spreadDet == false ? this.setState({spreadDet:true}):this.setState({spreadDet:false});
+              } /*设置说明书*/}>
+              {
+                ()=>{
+                    if (this.state.spreadDet == true) {
+                      return (
+                        <Text>
+                          {this.props.MedMsg.detial}
+                        </Text>
+                      );
+               }else
+               {
+                  return(
+                    <Body>
+                     <Text>
+                    药品说明
+                     </Text>
+                  </Body>
+
+                  );
+               }
+                }
+              }    
+            </ListItem>
+            <ListItem itemDivider> {/*接下来是新闻*/}
+               <Text> </Text>
+            </ListItem>
+             <ListItem icon onPress={this.toNewsPanel}> {/*跳转函数，到新闻界面*/}
+                        <Left>
+                            <Icon name="wifi" /> {/*新闻图标*/}
+                        </Left>
+                        <Body>
+                          <Text>相关新闻</Text>
+                        </Body>    
+            </ListItem>
+         </Content>
+         <Footer>
+                    <FooterTab>
+                        <Button full iconLeft onPress={()=>{}}>
+                            <Text>加入药程管理</Text>
+                            <Icon name='medkit' />
+                        </Button>
+                    </FooterTab>
+        </Footer>
+       </Container>);
+
+
+  }
+ returnLastOne(){
+    this.props.navigator.pop();
+
+
+  }
+  toNewsPanel(){
+       this.props.MedMsg=rowData; //药品详细信息
+        var routeTemp={
+            id:idList.NewsPanel,
+            passProps:this.props,
+            type:"Right"  //从右边滑入
+        };
+        this.props.navigator.push(routeTemp);
+  }
+  returnPanel(){
+  }
+  --------------------------------------------------------------------------------------------
