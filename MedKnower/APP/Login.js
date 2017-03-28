@@ -40,10 +40,7 @@ var photoOptions={
 export default class Login extends Component {
   constructor(props){
       super(props);
-     //this.props.id=idList.Login; //登陆界面
   }
-  
-
   render() {
     return(
       <Container>
