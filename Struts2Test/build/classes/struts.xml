@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<struts>  
+	<package name="InterceptorPackage" extends="struts-default">
+		<global-results>
+			<result name="LOGIN" type="redirect">/Login.jsp</result>  
+		</global-results>
+	<!-- 拦截器部分 描述-->
+		<interceptors>
+	<!-- 定义拦截器 -->
+			<interceptor name="Interceptor1" ></interceptor>
+			<interceptor name="Interceptor2" ></interceptor>
+			<interceptor name="Interceptor2" ></interceptor>
+		
+	<!-- 定义拦截器栈，每个栈中拦截器形成拦截器链，调用方式自顶向下 -->
+			<interceptor-stack name="MyInterceptorStack">
+				<interceptor-ref name="Interceptor1" class="com.llf.interCeptor.Interceptor1"></interceptor-ref>
+				<interceptor-ref name="Interceptor2" class="com.llf.interCeptor.Interceptor2"></interceptor-ref> 
+				<interceptor-ref name="Interceptor3" class="com.llf.interCeptor.Interceptor3"></interceptor-ref> 
+		<!--定义 自定义拦截器 -->
+		
+			<interceptor-ref name="defaultStack"></interceptor-ref> <!-- 将系统默认拦截器栈加入 -->
+		
+			</interceptor-stack>
+			<default-interceptor-ref name="MyInterceptorStack"></default-interceptor-ref>
+	 <!-- 将我们的拦截器设置为系统默认拦截器 -->
+		</interceptors>
+	</package>
+	
+    <package name="LoginPackage" extends="InterceptorPackage">  
+        <action name="Index" class="com.llf.action.Index">  
+        	<result name="LOGIN">/Login.jsp</result>  
+			<interceptor-ref name="MyInterceptorStack"></interceptor-ref> <!-- 让该action经过定义的拦截器栈 -->
+        </action>      
+ 		<action name="Login" class="com.llf.action.Login">  
+ 			<result name="LOGINSUCCEED">/LoginSucceed.jsp</result> 
+			<result name="LOGINFAILED">/LoginFailed.jsp</result> 
+			<interceptor-ref name="MyInterceptorStack"></interceptor-ref> <!-- 让该action经过定义的拦截器栈 -->
+        </action>  
+    </package> 
+</struts>
