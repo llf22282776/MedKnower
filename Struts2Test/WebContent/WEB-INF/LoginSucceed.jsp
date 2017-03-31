@@ -1,3 +1,4 @@
+<%@page import="com.opensymphony.xwork2.ActionContext"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.opensymphony.xwork2.util.ValueStack"%>
 <%@page import="java.util.Iterator"%>
@@ -16,7 +17,7 @@
 	<table border="1" width=360> 
 	<%
 		ValueStack vs= (ValueStack)request.getAttribute("struts.valueStack"); 
-		Map studentMap=(Map)vs.findValue("studentMap");
+		Map studentMap=ActionContext.getContext().getSession();
 		Iterator<Map.Entry<String, Object>> entries = studentMap.entrySet().iterator();
 		while(entries.hasNext()){%>
 		<tr>
@@ -27,9 +28,6 @@
 		<%
 		}
 		%>
-	
-	
 	</table>
-	
 </body>
 </html>

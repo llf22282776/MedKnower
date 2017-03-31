@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1"
-xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-http://xmlns.jcp.org/xml/ns/javaee/web-app_3_0.xsd">
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<web-app >
+ 		<!-- 定义过滤器 ，可以定义多个 -->
 <filter>
+	<filter-name>StrutsFilter</filter-name>
+	<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 </filter>
- <welcome-file-list>
- 	<!-- 初始界面action，这个Login action不需要有成员变量 -->
-	<welcome-file>/Login.jsp</welcome-file>
+
+		<!-- 过滤器过滤能力定义，不同过滤器处理不同的url请求 -->
+<filter-mapping>
+	<filter-name>StrutsFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<welcome-file-list>
+	<welcome-file>/WEB-INF/Index.action</welcome-file>
 </welcome-file-list>
- </web-app>
+</web-app>
